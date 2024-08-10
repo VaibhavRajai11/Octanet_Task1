@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #333;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .img {
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .search {
+      height: 40px;
+      width: 400px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      padding: 0 20px;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease;
+    }
+
+    .search:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    .icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .slideshow {
+      background-color: #fff;
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      height: 450px;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .imgss {
+      max-width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .imgss.active {
+      opacity: 1;
+    }
+
+    .products {
+      margin: 30px auto;
+      width: 90%;
+      max-width: 1200px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background-color: white;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #007BFF, #00BFFF);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .headings {
+      grid-column: 1 / -1;
+      font-size: 28px;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #007BFF;
+    }
+
+    .prodimage {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .prodname {
+      font-size: 20px;
+      color: #333;
+      margin: 10px 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .proddesc {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      let currentIndex = 0;
+      const images = ["img1.jpg", "img2.jpg", "img3.jpg"];
+      const slideshow = document.querySelector(".slideshow");
+
+      images.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.classList.add("imgss");
+        if (index === 0) img.classList.add("active");
+        slideshow.appendChild(img);
+      });
+
+      setInterval(() => {
+        const currentImage = document.querySelector(".imgss.active");
+        currentImage.classList.remove("active");
+        currentIndex = (currentIndex + 1) % images.length;
+        slideshow.children[currentIndex].classList.add("active");
+      }, 3000);
+    };
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <img src="/logo.jpeg" class="img" />
+    <input type="text" class="search" placeholder="Search Anything" />
+    <i class="fa-solid fa-cart-shopping icon"></i>
+  </div>
+
+  <div class="slideshow"></div>
+
+  <div class="products">
+    <legend class="headings">Mobiles</legend>
+    <div class="card">
+      <img src="phone.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mobile 1</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="phone.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mobile 2</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="phone.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mobile 3</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="phone.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mobile 4</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+  </div>
+
+  <div class="products">
+    <legend class="headings">Watches</legend>
+    <div class="card">
+      <img src="watch.jpg" class="prodimage">
+      <h4 class="prodname"><u>Watch 1</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="watch.jpg" class="prodimage">
+      <h4 class="prodname"><u>Watch 2</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="watch.jpg" class="prodimage">
+      <h4 class="prodname"><u>Watch 3</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="watch.jpg" class="prodimage">
+      <h4 class="prodname"><u>Watch 4</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+  </div>
+
+  <div class="products">
+    <legend class="headings">Mouse</legend>
+    <div class="card">
+      <img src="mouse.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mouse 1</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="mouse.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mouse 2</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="mouse.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mouse 3</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+    <div class="card">
+      <img src="mouse.jpg" class="prodimage">
+      <h4 class="prodname"><u>Mouse 4</u></h4>
+      <p class="proddesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <hr>
+    </div>
+  </div>
+</body>
+</html>
